@@ -11,7 +11,6 @@ const handler = nc()
   .post(
     async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg>) => {
       try {
-        console.log('cadastro endpoint', req);
         const usuario = req.body as CadastroRequisicao;
 
         if (!usuario.nome || usuario.nome.length < 2) {
@@ -53,9 +52,8 @@ const handler = nc()
         await UsuarioModel.create(newUser);
 
         return res.status(201).json({ mensagem: 'Usuário criado com sucesso' });
-      } catch (err) {
-        console.log(err);
-        return res.status(500).json({ mensagem: 'Usuário não cadastrado' });
+      } catch (err: any) {
+        return res.status(500).json({ mensagem: err.toString() });
       }
     }
   );
