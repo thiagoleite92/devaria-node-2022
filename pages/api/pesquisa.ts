@@ -36,6 +36,7 @@ const endpointPesquisa = async (
         const usuariosSanitizados = usuariosEncontrados.map((usuario) => ({
           nome: usuario.nome,
           email: usuario.email,
+          avatar: usuario.avatar,
         }));
 
         return res.status(200).json(usuariosSanitizados);
