@@ -1,7 +1,7 @@
 import type { NextApiResponse } from 'next';
 import { conectarMongoDB, validarTokenJWT } from '../../middlewares/';
 import { UsuarioModel, PublicacaoModel } from '../../models';
-import type { CadastroRequisicao, RespostaPadraoMsg } from '../../types';
+import type { RespostaPadraoMsg } from '../../types';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
 

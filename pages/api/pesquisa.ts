@@ -37,6 +37,8 @@ const endpointPesquisa = async (
           nome: usuario.nome,
           email: usuario.email,
           avatar: usuario.avatar,
+          seguidores: usuario.seguidores,
+          seguindo: usuario.seguindo,
         }));
 
         return res.status(200).json(usuariosSanitizados);
