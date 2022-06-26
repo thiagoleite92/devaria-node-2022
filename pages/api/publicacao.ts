@@ -23,7 +23,7 @@ const handler = nc()
           .json({ erro: 'Parametros de entrada não informados' });
       }
 
-      const { descricao, file } = req?.body;
+      const { descricao } = req?.body;
 
       if (!descricao || descricao.length < 2) {
         return res.status(400).json({ erro: 'Descriçao inválida' });
@@ -43,6 +43,10 @@ const handler = nc()
       };
 
       await PublicacaoModel.create(publicacao);
+      await UsuarioModel.findByIdAndUpdate(
+        { _id: usuario._id },
+        { $inc: { publicacoes: 1 } }
+      );
 
       return res
         .status(201)
