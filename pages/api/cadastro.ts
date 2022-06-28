@@ -5,8 +5,9 @@ import { UsuarioModel } from '../../models';
 import md5 from 'md5';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
+import { politicaCORS } from '../../middlewares/politicaCORS';
 
-const handler = nc()
+const endpointCadastro = nc()
   .use(upload.single('file'))
   .post(
     async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg>) => {
@@ -64,4 +65,4 @@ export const config = {
   },
 };
 
-export default conectarMongoDB(handler);
+export default politicaCORS(conectarMongoDB(endpointCadastro));

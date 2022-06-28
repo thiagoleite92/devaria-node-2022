@@ -1,7 +1,11 @@
 import { PublicacaoModel } from './../../models/PublicacaoModel';
 import { RespostaPadraoMsg } from './../../types/';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { conectarMongoDB, validarTokenJWT } from '../../middlewares';
+import {
+  conectarMongoDB,
+  validarTokenJWT,
+  politicaCORS,
+} from '../../middlewares';
 import { UsuarioModel } from '../../models';
 
 const endpointComentario = async (
@@ -53,4 +57,6 @@ const endpointComentario = async (
   }
 };
 
-export default validarTokenJWT(conectarMongoDB(endpointComentario));
+export default politicaCORS(
+  validarTokenJWT(conectarMongoDB(endpointComentario))
+);

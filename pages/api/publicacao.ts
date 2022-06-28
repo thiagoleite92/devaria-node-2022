@@ -1,3 +1,4 @@
+import { politicaCORS } from './../../middlewares/politicaCORS';
 import type { NextApiResponse } from 'next';
 import { conectarMongoDB, validarTokenJWT } from '../../middlewares/';
 import { UsuarioModel, PublicacaoModel } from '../../models';
@@ -5,7 +6,7 @@ import type { RespostaPadraoMsg } from '../../types';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
 
-const handler = nc()
+const endpointPublicacao = nc()
   .use(upload.single('file'))
   .post(async (req: any, res: NextApiResponse<RespostaPadraoMsg>) => {
     try {
@@ -62,4 +63,6 @@ export const config = {
   },
 };
 
-export default validarTokenJWT(conectarMongoDB(handler));
+export default politicaCORS(
+  validarTokenJWT(conectarMongoDB(endpointPublicacao))
+);

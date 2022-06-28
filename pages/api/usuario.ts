@@ -1,6 +1,10 @@
 import type { RespostaPadraoMsg } from './../../types/';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { validarTokenJWT, conectarMongoDB } from '../../middlewares';
+import {
+  validarTokenJWT,
+  conectarMongoDB,
+  politicaCORS,
+} from '../../middlewares';
 import { UsuarioModel } from '../../models';
 import nc from 'next-connect';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
@@ -82,4 +86,4 @@ export const config = {
   },
 };
 
-export default validarTokenJWT(conectarMongoDB(endpointUsuario));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(endpointUsuario)));
