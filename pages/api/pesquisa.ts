@@ -38,6 +38,7 @@ const endpointPesquisa = async (
         });
 
         const usuariosSanitizados = usuariosEncontrados.map((usuario) => ({
+          id: usuario._id,
           nome: usuario.nome,
           email: usuario.email,
           avatar: usuario.avatar,
